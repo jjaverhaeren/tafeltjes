@@ -3,11 +3,44 @@
   font-size: 2.5rem;
   color: white;
   padding: 10px;
-  width: 950px;
-  height: 50px;
+  /* width: auto;
+  height: 50px; */
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   margin: 0 auto;
+}
+
+.letsGo {
+  width: 100px;
+  height: 70px;
+  margin: 50px;
+  font-weight: bold;
+  font-size: 2rem;
+  padding: 10px;
+  font-family: "Burbank Big Condensed";
+  background-color: rgb(24, 61, 104);
+  color: white;
+  border-radius: 3px;
+  padding: 5px 10px;
+}
+
+.letsGo:hover {
+    background-color: rgb(16, 98, 192);
+}
+
+.chooseTables_buttons {
+  background-color: rgb(139, 163, 149);
+  color: white;
+  font-weight: bold;
+  border-radius: 3px;
+  width: 30px;
+  height: 30px;
+  margin: 2px;
+}
+
+.buttons-container {
+    align-self: center;
+  margin: 0px 10px 10px
 }

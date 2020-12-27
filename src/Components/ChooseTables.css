@@ -1,0 +1,13 @@
+.chooseTables {
+  font-family: "Burbank Big Condensed";
+  font-size: 2.5rem;
+  color: white;
+  padding: 10px;
+  width: 950px;
+  height: 50px;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  margin: 0 auto;
+}

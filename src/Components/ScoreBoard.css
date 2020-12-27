@@ -1,14 +1,33 @@
 .scoreBoard {
   font-family: "Burbank Big Condensed";
-  color: white;
+  color: rgb(19, 47, 82);
 }
 
 .correct-container,
 .wrong-container,
 .level-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-content: center;
   width: 100px;
-  height: 100px;
-  border: 3px solid white;
+  height: 40px;
+  border: 1px solid  rgb(24, 61, 104);
+  border-radius: 10px;
+  text-align: center;
+  margin-left: 10px;
+}
+
+.score {
+  display: flex;
+  flex-direction: row;
+  justify-content: left;
+  align-content: center;
   text-align: center;
 }
 
+h3,
+h4 {
+  margin: 5px 5px 0px 10px;
+  align-self: center;
+}

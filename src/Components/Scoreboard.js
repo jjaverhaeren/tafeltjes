@@ -8,15 +8,13 @@ const ScoreBoard = props => {
   return (
     <div className="scoreBoard">
       <div className="correct-container">
-        <h3>Goed</h3>
-        <Score amount={props.rightAnswers} />
+        <Score amount={props.rightAnswers} label={"GOED:"} />
       </div>
       <div className="wrong-container">
-        <h3>Fout</h3>
-        <Score amount={props.wrongAnswers} />
+        <Score amount={props.wrongAnswers} label={"FOUT:"} />
       </div>
       <div className="level-container">
-        <h4>Level</h4>
+        <h4>Level:</h4>
         <h3>{props.level}</h3>
       </div>
     </div>

@@ -1,12 +1,12 @@
 import React from "react";
 
-
 const Score = props => {
   //   console.log(props.arrayOfSums);
 
   return (
     <div className="score">
-        {props.amount}
+      <h4>{props.label}</h4>
+      <h3>{props.amount}</h3>
     </div>
   );
 };

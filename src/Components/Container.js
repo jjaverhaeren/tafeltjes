@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ChooseTables from "./ChooseTables";
 import AllSumsContainer from "./AllSumsContainer";
 import ScoreBoard from "./Scoreboard";
+import Victory from "./Victory"
 
 class Container extends Component {
   constructor() {
@@ -14,6 +15,8 @@ class Container extends Component {
       answers: 1,
       rightAnswers: 0,
       wrongAnswers: 0,
+      HP: [100],
+      shield: [0],
       level: "Noob",
       sumsWithAnswerArray: [],
     };
@@ -124,11 +127,12 @@ class Container extends Component {
   }
 
   allDone() {
-    this.state.answers === this.state.totalOfSums
-      ? alert("KLAAR!")
-      : console.log(
-          `#answers given: ${this.state.answers} vs # total of sums: ${this.state.totalOfSums}`
-        );
+    const victory = document.querySelector("#victory");
+    this.state.answers !== this.state.totalOfSums
+      ? console.log(
+        `#answers given: ${this.state.answers} vs # total of sums: ${this.state.totalOfSums}`
+      )
+      : victory.classList.add('victory-container')
   }
 
   getTotalOfSums(array) {
@@ -156,15 +160,57 @@ class Container extends Component {
     // console.log(second);
 
     const newTotalOfSums = this.getTotalOfSums(this.state.arrayOfChunks);
-    console.log(newTotalOfSums);
+    // console.log(newTotalOfSums);
     this.setState({ totalOfSums: newTotalOfSums });
 
-    console.log(this.state);
+    // console.log(this.state);
 
     result === answer
       ? this.handleCorrectAnswer(event)
       : this.handleWrongAnswer(event);
   }
+
+  setLevel() {
+    let shield = this.state.shield[0];
+    let newLevel;
+    if(shield >80){
+      newLevel = "Hacker";
+    } else if (shield>45){
+      newLevel = "Pro";
+    } else if (shield>26){
+      newLevel = "Medium";
+    } else if (shield>=0){
+      newLevel = "Noob";
+    } else {
+      newLevel = "no level set"
+    }
+    
+    this.setState(prevState => {
+      const newState = {...prevState, level: newLevel}
+      return newState;
+    });
+  }
+
+  calculateHpAndShield() {
+    const total = this.state.totalOfSums;
+    let newShield = [0];
+    let newHP = [100];
+    // console.log(total)
+    const right = this.state.rightAnswers;
+    total === 0 ? newShield = [0] :
+    newShield = [Math.round((right / total) * 100)];
+    // console.log(newShield)
+
+    const wrong = this.state.wrongAnswers;
+    total === 0 ? newHP = [100] :
+    newHP = [Math.round(100 - ((wrong / total) * 100))];
+    // console.log(newHP)
+
+    this.setState(prevState => {
+      const newState = {...prevState, HP: newHP, shield: newShield};
+      return newState;
+    })
+ } 
 
   handleCorrectAnswer(event) {
     // console.log(this.state.sumsWithAnswerArray);
@@ -182,10 +228,14 @@ class Container extends Component {
       // console.log(`amount of right answers: ${newRightAnswers}`);
       return newState;
     });
+    this.calculateHpAndShield();
+    this.setLevel()
     this.allDone();
   }
 
-  handleWrongAnswer(event) {
+ 
+ 
+ handleWrongAnswer(event) {
     // console.log("WRONG ANSWER");
     const first = parseInt(
       event.target.parentNode.childNodes[0].childNodes[0].innerHTML
@@ -219,6 +269,8 @@ class Container extends Component {
       console.log(newState.sumsWithAnswerArray);
       return newState;
     });
+    this.calculateHpAndShield();
+    this.setLevel();
     this.allDone();
   }
 
@@ -232,9 +284,11 @@ class Container extends Component {
         <ScoreBoard
           rightAnswers={this.state.rightAnswers}
           wrongAnswers={this.state.wrongAnswers}
+          HP={this.state.HP}
+          shield={this.state.shield}
           level={this.state.level}
         />
-
+        <Victory />
         <AllSumsContainer
           checkResult={this.checkResult}
           arrayOfChunks={this.state.arrayOfChunks}

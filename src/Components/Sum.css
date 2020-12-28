@@ -8,14 +8,9 @@
   justify-content: center;
 } */
 
-.answer {
-  width: 50px;
-  height: 50px;
-  border: 3px solid lightseagreen;
-  margin: 10px;
-  font-size: 2rem;
-  text-align: center;
-  padding-top: 10px;
+.answer-container input {
+  /* border: 1px solid red; */
+  margin-left: 20px;
 }
 
 .answer-container {
@@ -29,22 +24,25 @@
 }
 
 .sum-container {
-  /* border: 1px solid rgb(231, 13, 13); */
-  background-color: rgb(167, 199, 236);
+  border: 1px solid rgb(1, 9, 46);
+  background-color: rgb(228, 247, 221);
+  color: rgb(24, 61, 104);
   /* color: white; */
+  /* font-weight: bold; */
+  font-family: "Arial";
   font-weight: bold;
-  /* font-family: "Burbank Big Condensed"; */
   border-radius: 3px;
   display: flex;
   flex-direction: row;
   width: 250px;
   margin: 2px;
+  padding-top: 3px;
 }
 
 .sum {
   display: flex;
   flex-direction: row;
-  width: 70px;
+  width: 50px;
   /* border: 2px solid lightseagreen; */
 }
 
@@ -53,14 +51,14 @@
 }
 
 .result {
-  width: 50px;
+  width: 30px;
   margin: 5px;
 }
 
 .right_or_wrong-circle {
   width: 15px;
   height: 15px;
-  border: 1px solid rgb(150, 150, 150);
+  border: 1px solid transparent;
   border-radius: 50%;
   align-self: center;
   margin-left: 30px;

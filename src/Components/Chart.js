@@ -1,55 +1,80 @@
 import React from "react";
-import { Bar } from "react-chartjs-2";
+import { HorizontalBar } from "react-chartjs-2";
 
-const Chart = ({ BarTitle, xAxisLabels, dataSet1Data, dataSet2Data }) => {
+const Chart = (props) => {
+// console.log(props)
+    let shield = props.shield;
+    let HP = props.HP;
 
-    // { BarTitle, xAxisLabels, dataSet1Data, dataSet2Data }
+    // console.log(`shield: ${shield}, HP: ${HP}`);
+
 
   const data = {
-    labels: xAxisLabels,
+    labels: "X",
     datasets: [
       {
-        label: "HP",
-        data: dataSet1Data,
-        backgroundColor: "rgba(238, 3, 23,  1)",
+        label: "Shield",
+        barPercentage: 0.5,
+        maxBarThickness: 20,
+        data: shield,
+        backgroundColor: "rgb(7, 218, 255)",
 
         borderWidth: 1,
         hoverBorderWidth: 1,
-        hoverBorderColor: "rgba(238, 3, 23,  0.5)",
+        hoverBorderColor: "rgb(7, 218, 255)",
       },
       {
-        label: "Shield",
-        data: dataSet2Data,
-        backgroundColor: "rgba(255, 208, 0, 1)",
+        label: "HP",
+        barPercentage: 0.5,
+        maxBarThickness: 16,
+        data: HP,
+        backgroundColor: "rgb(0, 255, 115)",
         borderWidth: 1,
         hoverBorderWidth: 1,
-        hoverBorderColor: "rgba(255, 208, 0, 0.5)",
+        hoverBorderColor: "rgb(0, 255, 115)",
       },
     ],
   };
 
   const options = {
+  
     title: {
-      display: true,
-      text: BarTitle,
-      fontSize: 22,
+      display: false,
+      text: "Player",
+      fontSize: 12,
       position: "top",
     },
+    legend: {
+      display: false,
+    },
     scales: {
-      yAxes: [
+      xAxes: [
         {
+          display: false,
+        gridLines: {
+          display: false,
+        },
           ticks: {
             beginAtZero: true,
-            max: 5,
+            min: 0,
+            max: 100,
           },
         },
+      ],
+      yAxes: [
+        {
+          display: false,
+          gridLines: {
+            display: false,
+          }
+        }
       ],
     },
   };
 
   return (
     <div className="chart">
-      <Bar className="nut" data={data} options={options} />
+      <HorizontalBar className="nut" data={data} options={options} />
     </div>
   );
 };

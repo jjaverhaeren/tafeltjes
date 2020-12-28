@@ -42,5 +42,11 @@
 
 .buttons-container {
   align-self: center;
-  margin: 0px 10px 10px;
+  margin: 10px;
+}
+
+.chooseTables>p {
+  /* border: 2px solid red; */
+  margin: 0px;
+  padding: 0px;
 }

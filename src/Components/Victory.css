@@ -1,0 +1,23 @@
+.victory-container {
+    display: block;
+    width: 2000px;
+    height: 600px;
+    background-image: url('../img/Victory_Royale_Slate_-_Fortnite.png');
+    font-family: "Burbank Big Condensed";
+    color: white;
+    position: fixed;
+    margin: 0 auto;
+    top: 0px; 
+  }
+
+  .victory-container_hiden {
+      display: none;
+      width: 2000px;
+      height: 600px;
+      background-image: url('../img/Victory_Royale_Slate_-_Fortnite.png');
+      font-family: "Burbank Big Condensed";
+      color: white;
+      position: fixed;
+      margin: 0 auto;
+      top: 0px; 
+  }

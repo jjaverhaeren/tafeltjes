@@ -1,6 +1,10 @@
 .scoreBoard {
   font-family: "Burbank Big Condensed";
-  color: rgb(19, 47, 82);
+  color: white;
+  position: fixed;
+  right: 20px;
+  top: 150px;
+ 
 }
 
 .correct-container,
@@ -10,15 +14,22 @@
   flex-direction: row;
   justify-content: left;
   align-content: center;
-  width: 100px;
+  width: 120px;
   height: 40px;
-  border: 1px solid  rgb(24, 61, 104);
+  background-color:   rgb(63, 31, 124);
   border-radius: 10px;
   text-align: center;
+  letter-spacing: 0.3rem;
+  font-size: 1.2rem;
   margin-left: 10px;
 }
 
+.level-container {
+  background-color:   rgb(177, 88, 182);
+}
+
 .score {
+  
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -31,3 +42,31 @@ h4 {
   margin: 5px 5px 0px 10px;
   align-self: center;
 }
+
+.chart-container {
+  /* border: 2px solid red; */
+  margin-left: 5px;
+ 
+}
+
+.correctwrongchart-container {
+  border: 2px solid  rgb(24, 61, 104);
+  border-radius: 10px;
+  background-color: rgba(63, 31, 124, 0.8);
+  width: 450px;
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+.correctwrong-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+ .test {
+  background-color: rgb(7, 218, 255);
+  color:rgb(0, 255, 115)
+ }

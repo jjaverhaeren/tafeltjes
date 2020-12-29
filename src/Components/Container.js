@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import ChooseTables from "./ChooseTables";
 import AllSumsContainer from "./AllSumsContainer";
 import ScoreBoard from "./Scoreboard";
+import Chart from "./Chart";
 
 class Container extends Component {
   constructor() {
@@ -233,6 +234,10 @@ class Container extends Component {
           rightAnswers={this.state.rightAnswers}
           wrongAnswers={this.state.wrongAnswers}
           level={this.state.level}
+        />
+        <Chart
+          dataSet1Data={[this.state.rightAnswers]}
+          dataSet2Data={[this.state.wrongAnswers]}
         />
 
         <AllSumsContainer

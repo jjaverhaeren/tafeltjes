@@ -10,7 +10,7 @@ const TenContainer = props => {
         <Sum
           key={sum.id}
           sum={sum}
-          checkResult={props.checkResult}
+          giveAnswer={props.giveAnswer}
           showYellow={props.showYellow}
           showOrange={props.showOrange}
           showRed={props.showRed}

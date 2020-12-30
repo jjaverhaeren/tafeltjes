@@ -1,15 +1,4 @@
-/* 
-.amounts-containers {
-  border: 2px solid rebeccapurple;
-  background-color: rgb(218, 219, 218);
-  width: 450px;
-  display: flex;
-  flex-direction: row;
-  justify-content: center;
-} */
-
 .answer-container input {
-  /* border: 1px solid red; */
   margin-left: 20px;
 }
 
@@ -19,13 +8,13 @@
 
 .tencontainer {
   /* border: 3px solid greenyellow; */
-  margin: 20px;
-  width: 350px;
+  margin: 0px auto;
+  width: auto;
 }
 
 .sum-container {
   border: 1px solid rgb(1, 9, 46);
-  background-color: rgb(228, 247, 221);
+  background-color: rgba(236, 221, 205, 0.9);
   color: rgb(24, 61, 104);
   /* color: white; */
   /* font-weight: bold; */
@@ -85,16 +74,12 @@
   background-color: rgb(5, 201, 5);
 }
 
-.chosen {
-  background-color: rgb(248, 72, 3);
-  color: white;
+body {
+  background-color: rgb(238, 190, 145);
 }
 
-/* form {
-  border: 3px solid blue;
-  width: 500px;
-} */
-
-body {
-  background-color: gray;
+@media only screen and (max-width: 900px) {
+  .tencontainer {
+    margin: 20px auto;
+  }
 }

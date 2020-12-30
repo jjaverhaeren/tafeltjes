@@ -9,7 +9,7 @@ const AllSumsContainer = props => {
       {props.arrayOfChunks.map(chunk => (
         <TenContainer
           key={props.arrayOfChunks.indexOf(chunk)}
-          checkResult={props.checkResult}
+          giveAnswer ={props.giveAnswer}
           arrayOfSums={chunk}
           chosenTables={props.chosenTables}
         />

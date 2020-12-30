@@ -1,10 +1,10 @@
 .scoreBoard {
   font-family: "Burbank Big Condensed";
   color: white;
-  position: fixed;
+  /* margin: 0 auto; */
+  /* position: fixed;
   right: 20px;
-  top: 150px;
- 
+  top: 150px; */
 }
 
 .correct-container,
@@ -16,7 +16,7 @@
   align-content: center;
   width: 120px;
   height: 40px;
-  background-color:   rgb(63, 31, 124);
+  background-color: rgb(63, 31, 124);
   border-radius: 10px;
   text-align: center;
   letter-spacing: 0.3rem;
@@ -25,11 +25,10 @@
 }
 
 .level-container {
-  background-color:   rgb(177, 88, 182);
+  background-color: rgb(177, 88, 182);
 }
 
 .score {
-  
   display: flex;
   flex-direction: row;
   justify-content: left;
@@ -46,27 +45,29 @@ h4 {
 .chart-container {
   /* border: 2px solid red; */
   margin-left: 5px;
- 
 }
 
 .correctwrongchart-container {
-  border: 2px solid  rgb(24, 61, 104);
+  border: 2px solid rgb(24, 61, 104);
   border-radius: 10px;
   background-color: rgba(63, 31, 124, 0.8);
   width: 450px;
+  height: 150px;
   display: flex;
-  flex-direction: row;
+  flex-direction: column;
   justify-content: center;
   align-items: center;
 }
 
 .correctwrong-container {
   display: flex;
-  flex-direction: column;
-  justify-content: center;
+  flex-direction: row;
+  justify-content: space-between;
   align-items: center;
 }
- .test {
-  background-color: rgb(7, 218, 255);
-  color:rgb(0, 255, 115)
- }
+
+@media only screen and (max-width: 900px) {
+  .scoreBoard {
+    margin: 20px auto;
+  }
+}

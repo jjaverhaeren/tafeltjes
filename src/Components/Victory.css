@@ -1,23 +1,58 @@
-.victory-container {
-    display: block;
-    width: 2000px;
-    height: 600px;
-    background-image: url('../img/Victory_Royale_Slate_-_Fortnite.png');
-    font-family: "Burbank Big Condensed";
-    color: white;
-    position: fixed;
-    margin: 0 auto;
-    top: 0px; 
-  }
+.victory-container1 {
+  border: 10px solid rgb(255, 153, 0);
+  border-radius: 20px;
+  display: block;
+  width: 400px;
+  height: 400px;
+  background-image: url("../img/VR_dance.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 153, 0, 0.6);
+  font-family: "Burbank Big Condensed";
+  color: white;
+  position: sticky;
+  margin: 0 auto;
+  top: 200px;
+  left: 460px;
+  text-align: center;
+  font-size: 2rem;
+}
 
-  .victory-container_hiden {
-      display: none;
-      width: 2000px;
-      height: 600px;
-      background-image: url('../img/Victory_Royale_Slate_-_Fortnite.png');
-      font-family: "Burbank Big Condensed";
-      color: white;
-      position: fixed;
-      margin: 0 auto;
-      top: 0px; 
-  }
+.victory-container2 {
+  border: 10px solid rgb(255, 153, 0);
+  border-radius: 20px;
+  display: block;
+  width: 400px;
+  height: 400px;
+  background-image: url("../img/VR_dance2.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 153, 0, 0.6);
+  font-family: "Burbank Big Condensed";
+  color: white;
+  position: sticky;
+  margin: 0 auto;
+  top: 200px;
+  left: 460px;
+  text-align: center;
+  font-size: 2rem;
+}
+.victory-container3 {
+  border: 10px solid rgb(255, 153, 0);
+  border-radius: 20px;
+  display: block;
+  width: 400px;
+  height: 400px;
+  background-image: url("../img/VR_dance3.gif");
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-color: rgba(255, 153, 0, 0.6);
+  font-family: "Burbank Big Condensed";
+  color: white;
+  position: sticky;
+  margin: 0 auto;
+  top: 200px;
+  left: 460px;
+  text-align: center;
+  font-size: 2rem;
+}

@@ -2,28 +2,33 @@ import React, { Component } from "react";
 import ChooseTables from "./ChooseTables";
 import AllSumsContainer from "./AllSumsContainer";
 import ScoreBoard from "./Scoreboard";
-import Victory from "./Victory"
+import Victory from "./Victory";
 
 class Container extends Component {
   constructor() {
     super();
     this.state = {
+      round: 0,
       chosenTables: [],
       arrayOfSums: [],
       arrayOfChunks: [],
       totalOfSums: 0,
-      answers: 1,
+      answersGiven: 1,
       rightAnswers: 0,
       wrongAnswers: 0,
       HP: [100],
       shield: [0],
       level: "Noob",
       sumsWithAnswerArray: [],
+      victory: false,
     };
     this.chooseTable = this.chooseTable.bind(this);
     this.handleChange = this.handleChange.bind(this);
+    this.giveAnswer = this.giveAnswer.bind(this);
     this.checkResult = this.checkResult.bind(this);
     this.renderSums = this.renderSums.bind(this);
+    this.resetSums = this.resetSums.bind(this);
+    this.handleClick = this.handleClick.bind(this);
   }
 
   handleChange(event) {
@@ -46,7 +51,12 @@ class Container extends Component {
       newChosenTables.includes(chosenTable)
         ? this.deleteFromArray(chosenTable, newChosenTables)
         : newChosenTables.push(chosenTable);
-      const newState = { ...prevState, chosenTables: newChosenTables };
+      const newTotalOfSums = newChosenTables.length * 11;
+      const newState = {
+        ...prevState,
+        chosenTables: newChosenTables,
+        totalOfSums: newTotalOfSums,
+      };
       // console.log(newChosenTables);
       return newState;
     });
@@ -86,25 +96,70 @@ class Container extends Component {
 
     // console.log(randomizedSums);
     this.setState(prevState => {
-      const newState = { ...prevState, arrayOfChunks: newArrayOfChunks };
+      const newRound = this.state.round + 1;
+      const newState = {
+        ...prevState,
+        round: newRound,
+        arrayOfChunks: newArrayOfChunks,
+      };
       return newState;
     });
   }
 
-  renderSums() {
+  handleClick(event) {
+    console.log(event.target.innerHTML);
+    event.target.innerHTML === "Let's Go!"
+      ? this.renderSums(event)
+      : this.resetSums(event);
+    // console.log(event.target.classList);
+  }
+
+  resetSums(event) {
+    const container = event.target.parentNode.childNodes[1];
+    console.log(container.childNodes[0]);
+    for (let i = 0; i < 10; i++) {
+      container.childNodes[i].classList.remove("chosen");
+    }
+    console.log(event.target.parentNode.childNodes[1]);
+    event.target.innerHTML = "Let's Go!";
+    event.target.classList.remove("letsReset");
+    event.target.classList.add("letsGo");
+    this.setState(prevState => {
+      const newState = {
+        ...prevState,
+        chosenTables: [],
+        arrayOfSums: [],
+        arrayOfChunks: [],
+        totalOfSums: 0,
+        answersGiven: 1,
+        rightAnswers: 0,
+        wrongAnswers: 0,
+        HP: [100],
+        shield: [0],
+        level: "Noob",
+        sumsWithAnswerArray: [],
+        victory: false,
+      };
+      return newState;
+    });
+  }
+  renderSums(event) {
     let arrayOfTen = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
-      arrayOfSums = [];
+      newArrayOfSums = [];
     this.state.chosenTables.forEach(chosenTable => {
       arrayOfTen.forEach(number => {
         let sum = {};
         sum.first = number;
         sum.second = chosenTable;
         sum.result = number * chosenTable;
-        arrayOfSums.push(sum);
+        newArrayOfSums.push(sum);
       });
     });
-
-    this.getArrayOfChunks(this.getRandomizedSums(arrayOfSums));
+    this.getArrayOfChunks(this.getRandomizedSums(newArrayOfSums));
+    event.target.innerHTML = "RESET";
+    event.target.classList.remove("letsGo");
+    event.target.classList.add("letsReset");
+    // console.log(this.state);
   }
 
   getSumsWithWrongAnswers() {
@@ -120,19 +175,23 @@ class Container extends Component {
     });
   }
 
-  practiseMore() {
-    const arrayOfSums = this.state.sumsWithAnswerArray;
-    console.log(arrayOfSums);
-    // this.getArrayOfChunks(this.getRandomizedSums(arrayOfSums));
-  }
+  // practiseMore() {
+  //   const arrayOfSums = this.state.sumsWithAnswerArray;
+  //   console.log(arrayOfSums);
+  //   // this.getArrayOfChunks(this.getRandomizedSums(arrayOfSums));
+  // }
 
   allDone() {
-    const victory = document.querySelector("#victory");
-    this.state.answers !== this.state.totalOfSums
+    console.log(
+      `victoryfactor: ${this.state.rightAnswers / this.state.totalOfSums}`
+    );
+    this.state.answersGiven !== this.state.totalOfSums
       ? console.log(
-        `#answers given: ${this.state.answers} vs # total of sums: ${this.state.totalOfSums}`
-      )
-      : victory.classList.add('victory-container')
+          `#answers given: ${this.state.answersGiven} vs # total of sums: ${this.state.totalOfSums}`
+        )
+      : this.state.rightAnswers / this.state.totalOfSums > 0.9
+      ? this.setState({ victory: true })
+      : console.log("show score");
   }
 
   getTotalOfSums(array) {
@@ -142,9 +201,18 @@ class Container extends Component {
     });
     return newTotalOfSums;
   }
+  giveAnswer(event) {
+    event.preventDefault();
+    // console.log("werkt");
+    this.setState(prevState => {
+      const newAnswersGiven = this.state.answersGiven + 1;
+      const newState = { ...prevState, answersGiven: newAnswersGiven };
+      return newState;
+    });
+    this.checkResult(event);
+  }
 
   checkResult(event) {
-    event.preventDefault();
     event.target.childNodes[0].disabled = true;
 
     const first = parseInt(
@@ -156,15 +224,7 @@ class Container extends Component {
     const result = first * second;
     const answer = parseInt(event.target.childNodes[0].value);
 
-    // console.log(first);
-    // console.log(second);
-
-    const newTotalOfSums = this.getTotalOfSums(this.state.arrayOfChunks);
-    // console.log(newTotalOfSums);
-    this.setState({ totalOfSums: newTotalOfSums });
-
     // console.log(this.state);
-
     result === answer
       ? this.handleCorrectAnswer(event)
       : this.handleWrongAnswer(event);
@@ -172,21 +232,22 @@ class Container extends Component {
 
   setLevel() {
     let shield = this.state.shield[0];
+    // console.log(shield);
     let newLevel;
-    if(shield >80){
+    if (shield > 80) {
       newLevel = "Hacker";
-    } else if (shield>45){
+    } else if (shield > 45) {
       newLevel = "Pro";
-    } else if (shield>26){
+    } else if (shield > 17) {
       newLevel = "Medium";
-    } else if (shield>=0){
+    } else if (shield >= 0) {
       newLevel = "Noob";
     } else {
-      newLevel = "no level set"
+      newLevel = "no level set";
     }
-    
+    // console.log(newLevel);
     this.setState(prevState => {
-      const newState = {...prevState, level: newLevel}
+      const newState = { ...prevState, level: newLevel };
       return newState;
     });
   }
@@ -195,22 +256,24 @@ class Container extends Component {
     const total = this.state.totalOfSums;
     let newShield = [0];
     let newHP = [100];
-    // console.log(total)
+    console.log(total);
     const right = this.state.rightAnswers;
-    total === 0 ? newShield = [0] :
-    newShield = [Math.round((right / total) * 100)];
+    total === 0
+      ? (newShield = [0])
+      : (newShield = [Math.round((right / total) * 100)]);
     // console.log(newShield)
 
     const wrong = this.state.wrongAnswers;
-    total === 0 ? newHP = [100] :
-    newHP = [Math.round(100 - ((wrong / total) * 100))];
+    total === 0
+      ? (newHP = [100])
+      : (newHP = [Math.round(100 - (wrong / total) * 100)]);
     // console.log(newHP)
 
     this.setState(prevState => {
-      const newState = {...prevState, HP: newHP, shield: newShield};
+      const newState = { ...prevState, HP: newHP, shield: newShield };
       return newState;
-    })
- } 
+    });
+  }
 
   handleCorrectAnswer(event) {
     // console.log(this.state.sumsWithAnswerArray);
@@ -218,24 +281,20 @@ class Container extends Component {
     circle.classList.remove("right_or_wrong-circle_red");
     circle.classList.add("right_or_wrong-circle_green");
     this.setState(prevState => {
-      const newAnswers = this.state.answers + 1;
       const newRightAnswers = this.state.rightAnswers + 1;
       const newState = {
         ...prevState,
-        answers: newAnswers,
         rightAnswers: newRightAnswers,
       };
-      // console.log(`amount of right answers: ${newRightAnswers}`);
+      console.log(`amount of right answers: ${newRightAnswers}`);
       return newState;
     });
     this.calculateHpAndShield();
-    this.setLevel()
+    this.setLevel();
     this.allDone();
   }
 
- 
- 
- handleWrongAnswer(event) {
+  handleWrongAnswer(event) {
     // console.log("WRONG ANSWER");
     const first = parseInt(
       event.target.parentNode.childNodes[0].childNodes[0].innerHTML
@@ -259,14 +318,12 @@ class Container extends Component {
       newSumsWithAnswerArray.push(sumWithAnswer);
 
       const newWrongAnswers = this.state.wrongAnswers + 1;
-      const newAnswers = this.state.answers + 1;
       const newState = {
         ...prevState,
-        answers: newAnswers,
         wrongAnswers: newWrongAnswers,
         sumsWithAnswerArray: newSumsWithAnswerArray,
       };
-      console.log(newState.sumsWithAnswerArray);
+      // console.log(newState.sumsWithAnswerArray);
       return newState;
     });
     this.calculateHpAndShield();
@@ -279,7 +336,7 @@ class Container extends Component {
       <div>
         <ChooseTables
           chooseTable={this.chooseTable}
-          renderSums={this.renderSums}
+          handleClick={this.handleClick}
         />
         <ScoreBoard
           rightAnswers={this.state.rightAnswers}
@@ -288,9 +345,9 @@ class Container extends Component {
           shield={this.state.shield}
           level={this.state.level}
         />
-        <Victory />
+        <Victory victory={this.state.victory} />
         <AllSumsContainer
-          checkResult={this.checkResult}
+          giveAnswer={this.giveAnswer}
           arrayOfChunks={this.state.arrayOfChunks}
           chosenTables={this.state.chosenTables}
         />

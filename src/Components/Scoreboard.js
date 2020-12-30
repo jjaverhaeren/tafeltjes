@@ -9,6 +9,12 @@ const ScoreBoard = (props) => {
   return (
     <div className="scoreBoard">
       <div className="correctwrongchart-container">
+      <div className="chart-container">
+          <Chart 
+          HP={props.HP}
+          shield={props.shield}
+          />
+        </div>
         <div className="correctwrong-container">
           <div className="correct-container">
             <Score amount={props.rightAnswers} label={"GOED:"} />
@@ -20,12 +26,7 @@ const ScoreBoard = (props) => {
             <h3>{props.level}</h3>
           </div>
         </div>
-        <div className="chart-container">
-          <Chart 
-          HP={props.HP}
-          shield={props.shield}
-          />
-        </div>
+      
       </div>
     </div>
   );

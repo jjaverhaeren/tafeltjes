@@ -25,7 +25,7 @@
 
 .sum-container {
   border: 1px solid rgb(1, 9, 46);
-  background-color: rgb(228, 247, 221);
+  background-color: rgba(236, 221, 205, 0.9);
   color: rgb(24, 61, 104);
   /* color: white; */
   /* font-weight: bold; */
@@ -85,10 +85,7 @@
   background-color: rgb(5, 201, 5);
 }
 
-.chosen {
-  background-color: rgb(248, 72, 3);
-  color: white;
-}
+
 
 /* form {
   border: 3px solid blue;

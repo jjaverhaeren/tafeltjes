@@ -41,7 +41,7 @@ const ChooseTables = props => {
       </div>
 
       <p>oefenen.</p>
-      <button className="letsGo" onClick={props.renderSums}>
+      <button className="letsGo" onClick={props.handleClick}>
         Let's Go!
       </button>
     </div>

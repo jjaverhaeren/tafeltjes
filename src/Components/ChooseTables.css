@@ -54,7 +54,6 @@
   margin: 2px;
 }
 
-
 .chosen {
   background-color: rgb(248, 72, 3);
   color: white;
@@ -71,3 +70,41 @@
   padding: 0px;
 }
 
+@media only screen and (max-width: 900px) {
+  .chooseTables {
+    font-family: "Burbank Big Condensed";
+    font-size: 2rem;
+    color: white;
+    padding: 10px;
+    /* width: auto;
+    height: 50px; */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+  }
+
+  .buttons-container {
+    width: 250px;
+  }
+
+  .letsGo {
+    width: 100px;
+    height: 80px;
+    margin: 10px auto;
+  }
+
+  .letsReset {
+    width: 100px;
+    height: 80px;
+    margin: 10px auto;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .buttons-container {
+    /* border: 1px solid red; */
+    width: 225px;
+  }
+}

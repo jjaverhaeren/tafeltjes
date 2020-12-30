@@ -333,24 +333,28 @@ class Container extends Component {
 
   render() {
     return (
-      <div>
-        <ChooseTables
-          chooseTable={this.chooseTable}
-          handleClick={this.handleClick}
-        />
-        <ScoreBoard
-          rightAnswers={this.state.rightAnswers}
-          wrongAnswers={this.state.wrongAnswers}
-          HP={this.state.HP}
-          shield={this.state.shield}
-          level={this.state.level}
-        />
+      <div className="app-container">
+        <div className="header">
+          <ChooseTables
+            chooseTable={this.chooseTable}
+            handleClick={this.handleClick}
+          />
+        </div>
         <Victory victory={this.state.victory} />
-        <AllSumsContainer
-          giveAnswer={this.giveAnswer}
-          arrayOfChunks={this.state.arrayOfChunks}
-          chosenTables={this.state.chosenTables}
-        />
+        <div className="play-container">
+          <ScoreBoard
+            rightAnswers={this.state.rightAnswers}
+            wrongAnswers={this.state.wrongAnswers}
+            HP={this.state.HP}
+            shield={this.state.shield}
+            level={this.state.level}
+          />
+          <AllSumsContainer
+            giveAnswer={this.giveAnswer}
+            arrayOfChunks={this.state.arrayOfChunks}
+            chosenTables={this.state.chosenTables}
+          />
+        </div>
       </div>
     );
   }

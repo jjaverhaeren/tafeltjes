@@ -29,6 +29,7 @@ class Container extends Component {
     this.renderSums = this.renderSums.bind(this);
     this.resetSums = this.resetSums.bind(this);
     this.handleClick = this.handleClick.bind(this);
+    this.focusToNextInput = this.focusToNextInput.bind(this);
   }
 
   handleChange(event) {
@@ -107,7 +108,6 @@ class Container extends Component {
   }
 
   handleClick(event) {
-    console.log(event.target.innerHTML);
     event.target.innerHTML === "Let's Go!"
       ? this.renderSums(event)
       : this.resetSums(event);
@@ -175,16 +175,7 @@ class Container extends Component {
     });
   }
 
-  // practiseMore() {
-  //   const arrayOfSums = this.state.sumsWithAnswerArray;
-  //   console.log(arrayOfSums);
-  //   // this.getArrayOfChunks(this.getRandomizedSums(arrayOfSums));
-  // }
-
   allDone() {
-    console.log(
-      `victoryfactor: ${this.state.rightAnswers / this.state.totalOfSums}`
-    );
     this.state.answersGiven !== this.state.totalOfSums
       ? console.log(
           `#answers given: ${this.state.answersGiven} vs # total of sums: ${this.state.totalOfSums}`
@@ -201,14 +192,30 @@ class Container extends Component {
     });
     return newTotalOfSums;
   }
+
+  focusToNextInput(event) {
+    const parent = event.target.parentNode.parentNode;
+    let array = [];
+    array.push(parent.childNodes);
+    let array2 = [];
+    for (let i = 0; i < 11; i++) {
+      array2.push(array[0][i]);
+    }
+    let index = array2.indexOf(event.target.parentNode);
+    let nextIndex = index + 1;
+    let nextIndexToFocus = array2[nextIndex].childNodes[1].childNodes[0];
+    nextIndexToFocus.focus();
+  }
+
   giveAnswer(event) {
     event.preventDefault();
-    // console.log("werkt");
     this.setState(prevState => {
       const newAnswersGiven = this.state.answersGiven + 1;
       const newState = { ...prevState, answersGiven: newAnswersGiven };
       return newState;
     });
+
+    this.focusToNextInput(event);
     this.checkResult(event);
   }
 
@@ -256,7 +263,6 @@ class Container extends Component {
     const total = this.state.totalOfSums;
     let newShield = [0];
     let newHP = [100];
-    console.log(total);
     const right = this.state.rightAnswers;
     total === 0
       ? (newShield = [0])
@@ -286,7 +292,6 @@ class Container extends Component {
         ...prevState,
         rightAnswers: newRightAnswers,
       };
-      console.log(`amount of right answers: ${newRightAnswers}`);
       return newState;
     });
     this.calculateHpAndShield();

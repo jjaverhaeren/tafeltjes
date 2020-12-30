@@ -7,8 +7,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-image: url("./img/fortnite.jpeg");
   background-size: cover;
-  background-repeat: none;
-  background-color: rgb(250, 210, 150);
+  background-repeat: no-repeat;
 }
 
 code {

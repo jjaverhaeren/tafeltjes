@@ -203,8 +203,9 @@ class Container extends Component {
     }
     let index = array2.indexOf(event.target.parentNode);
     let nextIndex = index + 1;
-    let nextIndexToFocus = array2[nextIndex].childNodes[1].childNodes[0];
-    nextIndexToFocus.focus();
+    nextIndex === 11
+      ? this.checkResult(event)
+      : array2[nextIndex].childNodes[1].childNodes[0].focus();
   }
 
   giveAnswer(event) {

@@ -3,17 +3,20 @@ import Score from "./Score";
 import Chart from "./Chart";
 import "./ScoreBoard.css";
 
-const ScoreBoard = (props) => {
+const ScoreBoard = props => {
   //   console.log(props.arrayOfSums);
 
   return (
     <div className="scoreBoard">
       <div className="correctwrongchart-container">
-      <div className="chart-container">
-          <Chart 
-          HP={props.HP}
-          shield={props.shield}
-          />
+        <div className="chart_icon-container">
+          <div className="hp_shield_container">
+            <div className="shield_icon"></div>
+            <div className="hp_icon"></div>
+          </div>
+          <div className="chart-container">
+            <Chart HP={props.HP} shield={props.shield} />
+          </div>
         </div>
         <div className="correctwrong-container">
           <div className="correct-container">
@@ -26,7 +29,6 @@ const ScoreBoard = (props) => {
             <h3>{props.level}</h3>
           </div>
         </div>
-      
       </div>
     </div>
   );

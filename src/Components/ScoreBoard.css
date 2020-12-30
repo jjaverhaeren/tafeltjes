@@ -1,10 +1,6 @@
 .scoreBoard {
   font-family: "Burbank Big Condensed";
   color: white;
-  /* margin: 0 auto; */
-  /* position: fixed;
-  right: 20px;
-  top: 150px; */
 }
 
 .correct-container,
@@ -44,6 +40,7 @@ h4 {
 
 .chart-container {
   /* border: 2px solid red; */
+  /* width: 400px; */
   margin-left: 5px;
 }
 
@@ -64,6 +61,40 @@ h4 {
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+}
+
+.hp_shield_container {
+  /* border: 1px solid yellow; */
+  width: 20px;
+  height: auto;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.hp_icon,
+.shield_icon {
+  width: 20px;
+  height: 20px;
+  margin: 20px 0px;
+}
+
+.hp_icon {
+  /* border: 1px solid green; */
+  background-image: url("../img/hpwhite.png");
+  background-size: contain;
+}
+
+.shield_icon {
+  /* border: 1px solid blue; */
+  background-image: url("../img/shieldwhite.png");
+  background-size: contain;
+}
+
+.chart_icon-container {
+  /* border: 1px solid greenyellow; */
+  display: flex;
+  flex-direction: row;
 }
 
 @media only screen and (max-width: 900px) {

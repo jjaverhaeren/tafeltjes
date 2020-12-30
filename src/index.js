@@ -2,6 +2,6 @@ import React from "react";
 import ReactDOM from "react-dom";
 import "./index.css";
 import App from "./App";
-import './fonts/BurbankBigCondensed-Black2'
+import './fonts/BurbankBigCondensed-Black.ttf'
 
 ReactDOM.render(<App />, document.getElementById("root"));

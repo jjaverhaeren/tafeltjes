@@ -18,7 +18,7 @@ const Sum = props => {
         <div className="sum-element">=</div>
       </div>
       <form onSubmit={props.giveAnswer} className="answer-container">
-        <input disabled={false} className="result" type="tel" />
+        <input disabled={false} className="result" type="number" />
       </form>
       <div className="right_or_wrong-circle"></div>
     </div>

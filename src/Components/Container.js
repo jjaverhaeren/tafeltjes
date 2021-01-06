@@ -182,7 +182,7 @@ class Container extends Component {
         )
       : this.state.rightAnswers / this.state.totalOfSums > 0.9
       ? this.setState({ victory: true })
-      : console.log("show score");
+      : console.log("RESET");
   }
 
   getTotalOfSums(array) {

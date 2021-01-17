@@ -1,36 +1,24 @@
-import React, { Component } from "react";
+import React, { useState } from "react";
 import ChooseTables from "./ChooseTables";
 import AllSumsContainer from "./AllSumsContainer";
 import ScoreBoard from "./Scoreboard";
 import Victory from "./Victory";
 
-class Container extends Component {
-  constructor() {
-    super();
-    this.state = {
-      round: 0,
-      chosenTables: [],
-      arrayOfSums: [],
-      arrayOfChunks: [],
-      totalOfSums: 0,
-      answersGiven: 1,
-      rightAnswers: 0,
-      wrongAnswers: 0,
-      HP: [100],
-      shield: [0],
-      level: "Noob",
-      sumsWithAnswerArray: [],
-      victory: false,
-    };
-    this.chooseTable = this.chooseTable.bind(this);
-    this.handleChange = this.handleChange.bind(this);
-    this.giveAnswer = this.giveAnswer.bind(this);
-    this.checkResult = this.checkResult.bind(this);
-    this.renderSums = this.renderSums.bind(this);
-    this.resetSums = this.resetSums.bind(this);
-    this.handleClick = this.handleClick.bind(this);
-    this.focusToNextInput = this.focusToNextInput.bind(this);
-  }
+const  Container = () => {
+
+  const [round, setRound] = useState(0);
+  const [chosenTables, setChosenTables] = useState([]);
+  const [arrayOfSums, setArrayOfSums] = useState([]);
+  const [arrayOfChunks, setArrayOfChunks] = useState([]);
+  const [totalOfSums, setTotalOfSums] = useState(0);
+  const [answersGiven, setAnswersGiven] = useState(1);
+  const [rightAnswers, setRightAnswers] = useState(0);
+  const [wrongAnswers, setWrongAnswers] = useState(0);
+  const [HP, setHP] = useState([100]);
+  const [shield, setShield] = useState([0]);
+  const [level, setLevel] = useState("Noob");
+  const [victory, setVictory] = useState(false);
+
 
   handleChange(event) {
     const { name, value, type, checked } = event.target;

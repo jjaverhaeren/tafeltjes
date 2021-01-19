@@ -1,9 +1,8 @@
 @font-face {
   font-family: "Burbank Big Condensed";
-  src: local("Burbank Big Condensed"), url(./fonts/BurbankBigCondensed-Black.ttf) format('truetype');
+  src: local("Burbank Big Condensed"),
+    url(./fonts/BurbankBigCondensed-Black.ttf) format("truetype");
 }
-
-
 
 body {
   margin: 0;

@@ -4,8 +4,7 @@ import AllSumsContainer from "./AllSumsContainer";
 import ScoreBoard from "./Scoreboard";
 import Victory from "./Victory";
 
-const  Container = () => {
-
+const Container = () => {
   const [round, setRound] = useState(0);
   const [chosenTables, setChosenTables] = useState([]);
   const [arrayOfSums, setArrayOfSums] = useState([]);
@@ -19,39 +18,34 @@ const  Container = () => {
   const [level, setLevel] = useState("Noob");
   const [victory, setVictory] = useState(false);
 
-
-  handleChange(event) {
+  const handleChange = event => {
     const { name, value, type, checked } = event.target;
     type === "checkbox"
       ? this.setState({ [name]: checked })
       : this.setState({ [name]: value });
-  }
+  };
 
-  deleteFromArray(item, array) {
+  const deleteFromArray = (item, array) => {
     const index = array.indexOf(item);
     array.splice(index, 1);
-  }
+  };
 
-  chooseTable(event) {
+  const chooseTable = event => {
     event.target.classList.toggle("chosen");
-    this.setState(prevState => {
-      const newChosenTables = [...prevState.chosenTables];
-      const chosenTable = parseInt(event.target.innerHTML);
-      newChosenTables.includes(chosenTable)
-        ? this.deleteFromArray(chosenTable, newChosenTables)
-        : newChosenTables.push(chosenTable);
-      const newTotalOfSums = newChosenTables.length * 11;
-      const newState = {
-        ...prevState,
-        chosenTables: newChosenTables,
-        totalOfSums: newTotalOfSums,
-      };
-      // console.log(newChosenTables);
-      return newState;
-    });
-  }
+    const newChosenTables = [...chosenTables];
+    const chosenTable = parseInt(event.target.innerHTML);
+    newChosenTables.includes(chosenTable)
+      ? this.deleteFromArray(chosenTable, newChosenTables)
+      : newChosenTables.push(chosenTable);
+    const newTotalOfSums = newChosenTables.length * 11;
+    setTotalOfSums(newTotalOfSums);
+    setChosenTables(newChosenTables);
+    // console.log(
+    //   `total of sums is: ${totalOfSums}, chosen tables array: ${chosenTables}`
+    // );
+  };
 
-  randomizeArray(array) {
+  const randomizeArray = array => {
     let currentIndex = array.length,
       temporaryValue,
       randomIndex;
@@ -64,74 +58,61 @@ const  Container = () => {
     }
     //   console.log(array)
     return array;
-  }
+  };
 
-  getRandomizedSums(array) {
+  const getRandomizedSums = array => {
     const randomizedSums = this.randomizeArray(array);
     randomizedSums.forEach(sum => {
       sum.id = randomizedSums.indexOf(sum);
     });
     return randomizedSums;
-  }
+  };
 
-  getArrayOfChunks(array) {
+  const getArrayOfChunks = array => {
     let newArrayOfChunks = [];
     while (array.length) {
       newArrayOfChunks.push(array.splice(0, 11));
     }
+    const newRound = round + 1;
+    setRound(newRound);
+    setArrayOfChunks(newArrayOfChunks);
+  };
 
-    // console.log(randomizedSums);
-    this.setState(prevState => {
-      const newRound = this.state.round + 1;
-      const newState = {
-        ...prevState,
-        round: newRound,
-        arrayOfChunks: newArrayOfChunks,
-      };
-      return newState;
-    });
-  }
-
-  handleClick(event) {
+  const handleClick = event => {
     event.target.innerHTML === "Let's Go!"
       ? this.renderSums(event)
       : this.resetSums(event);
     // console.log(event.target.classList);
-  }
+  };
 
-  resetSums(event) {
+  const resetSums = event => {
     const container = event.target.parentNode.childNodes[1];
-    console.log(container.childNodes[0]);
+    // console.log(container.childNodes[0]);
     for (let i = 0; i < 10; i++) {
       container.childNodes[i].classList.remove("chosen");
     }
-    console.log(event.target.parentNode.childNodes[1]);
+    // console.log(event.target.parentNode.childNodes[1]);
     event.target.innerHTML = "Let's Go!";
     event.target.classList.remove("letsReset");
     event.target.classList.add("letsGo");
-    this.setState(prevState => {
-      const newState = {
-        ...prevState,
-        chosenTables: [],
-        arrayOfSums: [],
-        arrayOfChunks: [],
-        totalOfSums: 0,
-        answersGiven: 1,
-        rightAnswers: 0,
-        wrongAnswers: 0,
-        HP: [100],
-        shield: [0],
-        level: "Noob",
-        sumsWithAnswerArray: [],
-        victory: false,
-      };
-      return newState;
-    });
-  }
-  renderSums(event) {
+    setChosenTables([]);
+    setArrayOfSums([]);
+    setArrayOfChunks([]);
+    setTotalOfSums(0);
+    setAnswersGiven(1);
+    setRightAnswers(0);
+    setWrongAnswers(0);
+    setHP([100]);
+    setShield([0]);
+    setLevel("Noob");
+    setSumsWithAnswerArray([]);
+    setVictory(false);
+  };
+
+  const renderSums = event => {
     let arrayOfTen = [0, 1, 2, 3, 4, 5, 6, 7, 8, 9, 10],
       newArrayOfSums = [];
-    this.state.chosenTables.forEach(chosenTable => {
+    chosenTables.forEach(chosenTable => {
       arrayOfTen.forEach(number => {
         let sum = {};
         sum.first = number;
@@ -145,40 +126,27 @@ const  Container = () => {
     event.target.classList.remove("letsGo");
     event.target.classList.add("letsReset");
     // console.log(this.state);
-  }
+  };
 
-  getSumsWithWrongAnswers() {
-    const newArrayOfSums = [];
-    this.state.sumsWithAnswerArray.forEach(sum => {
-      sum.result !== sum.answer
-        ? newArrayOfSums.push(sum)
-        : console.log("sum has correct answer");
-    });
-    this.setState(prevState => {
-      const newState = { ...prevState, arrayOfSums: newArrayOfSums };
-      return newState;
-    });
-  }
-
-  allDone() {
-    this.state.answersGiven !== this.state.totalOfSums
+  const allDone = () => {
+    answersGiven !== totalOfSums
       ? console.log(
-          `#answers given: ${this.state.answersGiven} vs # total of sums: ${this.state.totalOfSums}`
+          `#answers given: ${answersGiven} vs # total of sums: ${totalOfSums}`
         )
-      : this.state.rightAnswers / this.state.totalOfSums > 0.9
-      ? this.setState({ victory: true })
+      : rightAnswers / totalOfSums > 0.9
+      ? setVictory(true)
       : console.log("RESET");
-  }
+  };
 
-  getTotalOfSums(array) {
+  const getTotalOfSums = array => {
     let newTotalOfSums = 0;
     array.forEach(element => {
       newTotalOfSums += element.length;
     });
     return newTotalOfSums;
-  }
+  };
 
-  focusToNextInput(event) {
+  const focusToNextInput = event => {
     const parent = event.target.parentNode.parentNode;
     let array = [];
     array.push(parent.childNodes);
@@ -191,9 +159,9 @@ const  Container = () => {
     nextIndex === 11
       ? this.checkResult(event)
       : array2[nextIndex].childNodes[1].childNodes[0].focus();
-  }
+  };
 
-  giveAnswer(event) {
+  const giveAnswer = event => {
     event.preventDefault();
     this.setState(prevState => {
       const newAnswersGiven = this.state.answersGiven + 1;
@@ -203,9 +171,9 @@ const  Container = () => {
 
     this.focusToNextInput(event);
     this.checkResult(event);
-  }
+  };
 
-  checkResult(event) {
+  const checkResult = event => {
     event.target.childNodes[0].disabled = true;
 
     const first = parseInt(
@@ -221,9 +189,9 @@ const  Container = () => {
     result === answer
       ? this.handleCorrectAnswer(event)
       : this.handleWrongAnswer(event);
-  }
+  };
 
-  setLevel() {
+  const setLevel = () => {
     let shield = this.state.shield[0];
     // console.log(shield);
     let newLevel;
@@ -243,9 +211,9 @@ const  Container = () => {
       const newState = { ...prevState, level: newLevel };
       return newState;
     });
-  }
+  };
 
-  calculateHpAndShield() {
+  const calculateHpAndShield = () => {
     const total = this.state.totalOfSums;
     let newShield = [0];
     let newHP = [100];
@@ -265,9 +233,9 @@ const  Container = () => {
       const newState = { ...prevState, HP: newHP, shield: newShield };
       return newState;
     });
-  }
+  };
 
-  handleCorrectAnswer(event) {
+  const handleCorrectAnswer = event => {
     // console.log(this.state.sumsWithAnswerArray);
     const circle = event.target.parentNode.childNodes[2];
     circle.classList.remove("right_or_wrong-circle_red");
@@ -283,9 +251,9 @@ const  Container = () => {
     this.calculateHpAndShield();
     this.setLevel();
     this.allDone();
-  }
+  };
 
-  handleWrongAnswer(event) {
+  const handleWrongAnswer = event => {
     // console.log("WRONG ANSWER");
     const first = parseInt(
       event.target.parentNode.childNodes[0].childNodes[0].innerHTML
@@ -320,35 +288,30 @@ const  Container = () => {
     this.calculateHpAndShield();
     this.setLevel();
     this.allDone();
-  }
+  };
 
-  render() {
-    return (
-      <div className="app-container">
-        <div className="header">
-          <ChooseTables
-            chooseTable={this.chooseTable}
-            handleClick={this.handleClick}
-          />
-        </div>
-        <Victory victory={this.state.victory} />
-        <div className="play-container">
-          <ScoreBoard
-            rightAnswers={this.state.rightAnswers}
-            wrongAnswers={this.state.wrongAnswers}
-            HP={this.state.HP}
-            shield={this.state.shield}
-            level={this.state.level}
-          />
-          <AllSumsContainer
-            giveAnswer={this.giveAnswer}
-            arrayOfChunks={this.state.arrayOfChunks}
-            chosenTables={this.state.chosenTables}
-          />
-        </div>
+  return (
+    <div className="app-container">
+      <div className="header">
+        <ChooseTables chooseTable={chooseTable} handleClick={handleClick} />
       </div>
-    );
-  }
-}
+      <Victory victory={victory} />
+      <div className="play-container">
+        <ScoreBoard
+          rightAnswers={rightAnswers}
+          wrongAnswers={wrongAnswers}
+          HP={HP}
+          shield={shield}
+          level={level}
+        />
+        <AllSumsContainer
+          giveAnswer={giveAnswer}
+          arrayOfChunks={arrayOfChunks}
+          chosenTables={chosenTables}
+        />
+      </div>
+    </div>
+  );
+};
 
 export default Container;
